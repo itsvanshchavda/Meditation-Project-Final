@@ -7,6 +7,16 @@
   --link: #1e2ebd;
 }
 
+
+
+.heading{
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--light);
+
+}
+
 /* preload */
 .preload {
   position: fixed;
@@ -171,9 +181,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
-.logo {
-  padding: 2rem 2rem 1rem 2rem;
-}
+
 .nav-links {
   flex: 1;
   margin-top: 2rem;
@@ -447,8 +455,8 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 100px;
-  height: 3rem;
+   padding-top: 10px;
+  height: 4rem;
   display: flex;
   background: linear-gradient(
     240deg,

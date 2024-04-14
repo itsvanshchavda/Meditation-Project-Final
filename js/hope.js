@@ -736,7 +736,7 @@ function chatbotvoice(message) {
   }
   if (message.includes("you matter")) {
     speech.text =
-      "U matter is a meditation and relaxation app that designed to take you some moment to relax and breathe. U Matter mission is to help you find your inner peace and improve your mental health.";
+      "Meditaion Spot is a meditation and relaxation app that designed to take you some moment to relax and breathe. Meditation Spot mission is to help you find your inner peace and improve your mental health.";
   }
 
   // bye
