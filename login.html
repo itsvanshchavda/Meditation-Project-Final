@@ -1,105 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/login.css" />
+    <title>Meditation Spot Login</title>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="form-container sign-up">
+        <div id="sign-up-form">
+          <h1>Create Account</h1>
+          <div class="social-icons"></div>
+          <span>use your email for registration</span>
+          <input type="text" placeholder="Name" id="name" />
+          <input type="email" placeholder="Email" id="email" />
+          <input type="password" placeholder="Password" id="password" />
+          <button type="submit" id="signUpSubmit">Sign Up</button>
+        </div>
+      </div>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-  <link rel="stylesheet" href="./css/login.css" />
-  <title>Meditation Spot Login</title>
-</head>
+      <div class="form-container sign-in">
+        <div>
+          <h1>Sign In</h1>
+          <div class="social-icons"></div>
+          <span> use your email and password</span>
+          <input type="email" placeholder="Email" id="signInEmail" />
+          <input type="password" placeholder="Password" id="signInPassword" />
+          <a href="#">Forgot Your Password?</a>
+          <button type="submit" id="signInSubmit">Sign In</button>
+        </div>
+      </div>
 
-<body>
-  <div class="container" id="container">
-    <div class="form-container sign-up">
-      <div id="sign-up-form">
-        <h1>Create Account</h1>
-        <div class="social-icons"></div>
-        <span>use your email for registeration</span>
-        <input type="text" placeholder="Name" id="name" />
-        <input type="email" placeholder="Email" id="email" />
-        <input type="password" placeholder="Password" id="password" />
-        <button type="submit" id="signUpSubmit"> Sign Upppp</button>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Welcome Back!</h1>
+            <p>Enter your personal details to use all site features</p>
+            <button class="hidden" id="login">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>Hello, Friend!</h1>
+            <p>Register with your personal details to use all site features</p>
+            <button class="hidden" id="register" type="submit">Sign Up</button>
+          </div>
+        </div>
       </div>
     </div>
 
+    <script src="script.js"></script>
 
-    <div class="form-container sign-in">
-      <form id="sign-in-form">
-        <h1>Sign In</h1>
-        <div class="social-icons"></div>
-        <span> use your email password</span>
-        <input type="email" placeholder="Email" id="sign-in-email" />
-        <input type="password" placeholder="Password" id="sign-in-password" />
-        <a href="#">Forget Your Password?</a>
+    <!-- Script for firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+        child,
+        update,
+      } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-        <button type="submit" id="sign-in-submit">Sign In</button>
-      </form>
-    </div>
-    <div class="toggle-container">
-      <div class="toggle">
-        <div class="toggle-panel toggle-left">
-          <h1>Welcome Back!</h1>
-          <p>Enter your personal details to use all of site features</p>
-          <button class="hidden" id="login">Sign In</button>
-        </div>
-        <div class="toggle-panel toggle-right">
-          <h1>Hello, Friend!</h1>
-          <p>
-            Register with your personal details to use all of site features
-          </p>
-          <button class="hidden" id="register" type="submit">Sign Up</button>
-        </div>
-      </div>
-    </div>
-  </div>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBfPil6ttIUSQc8W7YYqrS2PcuLOn8nfQI",
+        authDomain: "meditation-spot.firebaseapp.com",
+        databaseURL: "https://meditation-spot-default-rtdb.firebaseio.com",
+        projectId: "meditation-spot",
+        storageBucket: "meditation-spot.appspot.com",
+        messagingSenderId: "871660264200",
+        appId: "1:871660264200:web:14cffbf14b3eb2f0286abd",
+      };
 
-  <script src="script.js"></script>
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const auth = getAuth();
 
-  <!-- Script for firebase -->
+      document.getElementById("signUpSubmit").addEventListener("click", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const name = document.getElementById("name").value;
+        const password = document.getElementById("password").value;
 
-  <script type="module">
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            // Save user data to Firebase
+            set(ref(db, "users/" + user.uid), {
+              email: email,
+              name: name,
+            });
+            alert("Signup Success");
+            localStorage.setItem("user", JSON.stringify(user));
+            window.location.href = "index.html";
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+          });
+      });
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-    import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js'
+      document.getElementById("signInSubmit").addEventListener("click", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("signInEmail").value;
+        const password = document.getElementById("signInPassword").value;
 
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBfPil6ttIUSQc8W7YYqrS2PcuLOn8nfQI",
-      authDomain: "meditation-spot.firebaseapp.com",
-      projectId: "meditation-spot",
-      storageBucket: "meditation-spot.appspot.com",
-      messagingSenderId: "871660264200",
-      appId: "1:871660264200:web:14cffbf14b3eb2f0286abd"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app)
-    const auth = getAuth();
-
-
-    signUpSubmit.addEventListener('click', (e) => {
-      var email = document.getElementById('email').value
-      var name = document.getElementById('name').value
-      var password = document.getElementById("password").value
-
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCred) => {
-          const user = userCred.user
-          console.log(user)
-          alert("Sign")
-        })
-
-        .catch((err) => {
-          const errCode = err.code
-          const errMes = err.message;
-
-          alert(errMes)
-        })
-    })
-
-  </script>
-
-</body>
-
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            const dt = new Date();
+            update(ref(db, "users/" + user.uid), {
+              last_login: dt,
+            });
+            alert("Login success");
+            localStorage.setItem("user", JSON.stringify(user));
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+          });
+      });
+    </script>
+  </body>
 </html>
