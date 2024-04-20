@@ -698,7 +698,7 @@ function chatbotvoice(message) {
     let finalresult = intro[Math.floor(Math.random() * intro.length)];
     speech.text = finalresult;
   }
-  if (message.includes("your name")) {
+  if (message.includes("New")) {
     let finalresult = intro[Math.floor(Math.random() * intro.length)];
     speech.text = finalresult;
   }

@@ -73,7 +73,7 @@ function getName() {
     name.textContent = " [Enter name]";
   } else {
     name.textContent = localStorage.getItem("name");
-  }
+  } 
 }
 
 // setnname
@@ -90,8 +90,8 @@ function setName(e) {
   }
 }
 
-name.addEventListener("keypress", setName);
-name.addEventListener("blur", setName);
+name?.addEventListener("keypress", setName);
+name?.addEventListener("blur", setName);
 getName();
 
 // Reminder

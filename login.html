@@ -1,136 +1,205 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./css/login.css" />
-    <title>Meditation Spot Login</title>
-  </head>
-  <body>
-    <div class="container" id="container">
-      <div class="form-container sign-up">
-        <div id="sign-up-form">
-          <h1>Create Account</h1>
-          <div class="social-icons"></div>
-          <span>use your email for registration</span>
-          <input type="text" placeholder="Name" id="name" />
-          <input type="email" placeholder="Email" id="email" />
-          <input type="password" placeholder="Password" id="password" />
-          <button type="submit" id="signUpSubmit">Sign Up</button>
-        </div>
-      </div>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
 
-      <div class="form-container sign-in">
-        <div>
-          <h1>Sign In</h1>
-          <div class="social-icons"></div>
-          <span> use your email and password</span>
-          <input type="email" placeholder="Email" id="signInEmail" />
-          <input type="password" placeholder="Password" id="signInPassword" />
-          <a href="#">Forgot Your Password?</a>
-          <button type="submit" id="signInSubmit">Sign In</button>
-        </div>
-      </div>
-
-      <div class="toggle-container">
-        <div class="toggle">
-          <div class="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
-            <p>Enter your personal details to use all site features</p>
-            <button class="hidden" id="login">Sign In</button>
+      <link rel="stylesheet" href="./css/login.css" />
+      <title>Meditation Spot Login</title>
+    </head>
+    <body>
+      <div class="container">
+        <input type="checkbox" id="flip" />
+        <div class="cover">
+          <div class="front">
+            <img src="./images/bgForm.jpg" alt="" />
+            <div class="text">
+              <span class="text-1"
+                >Every new friend is a <br />
+                new adventure</span
+              >
+              <span class="text-2">Let's get connected</span>
+            </div>
           </div>
-          <div class="toggle-panel toggle-right">
-            <h1>Hello, Friend!</h1>
-            <p>Register with your personal details to use all site features</p>
-            <button class="hidden" id="register" type="submit">Sign Up</button>
+          <div class="back">
+            <img src="./images/bgForm.jpg" alt="" />
+            <div class="text">
+              <span class="text-1"
+                >Complete miles of journey <br />
+                with one step</span
+              >
+              <span class="text-2">Let's get started</span>
+            </div>
           </div>
         </div>
+
+        <!-- Login -->
+        <div class="forms">
+          <div class="form-content">
+            <div class="login-form">
+              <div class="title">Login</div>
+
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i class="fas fa-envelope"></i>
+                  <input
+                    type="text"
+                    placeholder="Enter your email"
+                    required
+                    id="signInEmail"
+                  />
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                    id="signInPassword"
+                  />
+                </div>
+                <div class="button input-box">
+                  <input type="submit" value="Submit" id="signInSubmit" />
+                </div>
+                <div class="text sign-up-text">
+                  Don't have an account? <label for="flip">Sign up now</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Signup -->
+            <div class="signup-form">
+              <div class="title">Signup</div>
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i class="fas fa-user"></i>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    required
+                    id="name"
+                  />
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-envelope"></i>
+                  <input
+                    type="text"
+                    placeholder="Enter your email"
+                    required
+                    id="email"
+                  />
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                    id="password"
+                  />
+                </div>
+                <div class="button input-box">
+                  <input type="submit" value="Submit" id="signUpSubmit" />
+                </div>
+                <div class="text sign-up-text">
+                  Already have an account? <label for="flip">Login now</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <script src="script.js"></script>
+      <script src="script.js"></script>
 
-    <!-- Script for firebase -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-      import {
-        getDatabase,
-        ref,
-        set,
-        get,
-        child,
-        update,
-      } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
-      import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-      } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+      <!-- Script for firebase -->
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import {
+          getDatabase,
+          ref,
+          set,
+          get,
+          child,
+          update,
+        } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+        import {
+          getAuth,
+          createUserWithEmailAndPassword,
+          signInWithEmailAndPassword,
+        } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBfPil6ttIUSQc8W7YYqrS2PcuLOn8nfQI",
-        authDomain: "meditation-spot.firebaseapp.com",
-        databaseURL: "https://meditation-spot-default-rtdb.firebaseio.com",
-        projectId: "meditation-spot",
-        storageBucket: "meditation-spot.appspot.com",
-        messagingSenderId: "871660264200",
-        appId: "1:871660264200:web:14cffbf14b3eb2f0286abd",
-      };
+        const firebaseConfig = {
+          apiKey: "AIzaSyBfPil6ttIUSQc8W7YYqrS2PcuLOn8nfQI",
+          authDomain: "meditation-spot.firebaseapp.com",
+          databaseURL: "https://meditation-spot-default-rtdb.firebaseio.com",
+          projectId: "meditation-spot",
+          storageBucket: "meditation-spot.appspot.com",
+          messagingSenderId: "871660264200",
+          appId: "1:871660264200:web:14cffbf14b3eb2f0286abd",
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-      const auth = getAuth();
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth();
 
-      document.getElementById("signUpSubmit").addEventListener("click", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("email").value;
-        const name = document.getElementById("name").value;
-        const password = document.getElementById("password").value;
+        document.getElementById("signUpSubmit").addEventListener("click", (e) => {
+          e.preventDefault();
+          const email = document.getElementById("email").value;
+          const name = document.getElementById("name").value;
+          const password = document.getElementById("password").value;
 
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            // Save user data to Firebase
-            set(ref(db, "users/" + user.uid), {
-              email: email,
-              name: name,
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+
+              set(ref(db, "users/" + user.uid), {
+                email: email,
+                name: name,
+              });
+              alert("Signup Success");
+              localStorage.setItem("fullname", JSON.stringify(name));
+              localStorage.setItem("user", JSON.stringify(user));
+              window.location.href = "index.html";
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              alert(errorMessage);
             });
-            alert("Signup Success");
-            localStorage.setItem("user", JSON.stringify(user));
-            window.location.href = "index.html";
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage);
-          });
-      });
+        });
 
-      document.getElementById("signInSubmit").addEventListener("click", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("signInEmail").value;
-        const password = document.getElementById("signInPassword").value;
+        
 
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            const dt = new Date();
-            update(ref(db, "users/" + user.uid), {
-              last_login: dt,
+        
+        // Event listener for the login form submission
+        document.getElementById("signInSubmit").addEventListener("click", (e) => {
+          e.preventDefault();
+          const email = document.getElementById("signInEmail").value;
+          const password = document.getElementById("signInPassword").value;
+
+          signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              const dt = new Date();
+              update(ref(db, "users/" + user.uid), {
+                last_login: dt,
+              });
+             
+
+              alert("Login Success");
+              localStorage.setItem("user", JSON.stringify(user));
+              window.location.href = "index.html";
+              
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              alert(errorMessage);
             });
-            alert("Login success");
-            localStorage.setItem("user", JSON.stringify(user));
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage);
-          });
-      });
-    </script>
-  </body>
-</html>
+        });
+      </script>
+    </body>
+  </html>
